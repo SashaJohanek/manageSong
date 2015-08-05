@@ -1,5 +1,5 @@
 {
-	"name": "manage-song",
+	"name": "react-song-rate",
 	"dependencies": {
 		"react": "0.12.2",
 		"bootstrap": "3.3.1",

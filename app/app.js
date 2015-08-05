@@ -1,6 +1,6 @@
 (function(React, _) {
   var App = require('./components/App.jsx'),
-      Song = require('./models/musicModel.js');
+      Song = require('./models/SongModel.js');
   
   _.mixin(_.string.exports());
   

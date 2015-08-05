@@ -12,13 +12,18 @@
   Song.subscribe(render);
 }(React, _));
 
-},{"./components/App.jsx":2,"./models/musicModel.js":9}],2:[function(require,module,exports){
+},{"./components/App.jsx":2,"./models/SongModel.js":9}],2:[function(require,module,exports){
 (function(React, module, undefined) {
   var Songs = require('./Songs.jsx'),
-      SongForm = require('./SongForm.jsx');
+      SongForm = require('./SongForm.jsx'),
+      SongAlert = require('./SongAlert.jsx');
   
   module.exports = React.createClass({displayName: "exports",
     render: function() {
+      /*var alert;
+      if (!this.props.songs || this.props.songs.length === 0) {
+        alert = <SongAlert />;
+      }*/
       return (
         React.createElement("div", {className: "container"}, 
           React.createElement("div", {className: "page-header"}, 
@@ -33,7 +38,7 @@
     }
   });
 }(React, module));
-},{"./SongForm.jsx":7,"./Songs.jsx":8}],3:[function(require,module,exports){
+},{"./SongAlert.jsx":6,"./SongForm.jsx":7,"./Songs.jsx":8}],3:[function(require,module,exports){
 (function(React) {
   var RatingStar = require('./RatingStar.jsx');
   module.exports = React.createClass({displayName: "exports",
@@ -144,6 +149,18 @@
     }
   });
 }(React, module));
+},{"./Rating.jsx":3}],6:[function(require,module,exports){
+(function(React, module, undefined) {
+  module.exports = React.createClass({displayName: "exports",
+    render: function() {
+      return (
+        React.createElement("div", {className: "alert alert-info"}, 
+          React.createElement("strong", null, "First!"), " You're the first one using this app. Make sure to add some songs to the list!"
+        )
+      );
+    }
+  });
+}(React, module));
 },{}],7:[function(require,module,exports){
 (function(React, _) {
   var Song = require('../models/SongModel.js');
@@ -210,6 +227,36 @@
     }
   });
 }(React, _));
+
+},{"../models/SongModel.js":9}],8:[function(require,module,exports){
+(function(React, module, undefined) {
+  var Song = require('./Song.jsx');
+  
+  module.exports = React.createClass({displayName: "exports",
+    render: function() {
+      var stars = [];
+      return (
+        React.createElement("table", {className: "table table-striped table-condensed"}, 
+          React.createElement("thead", null, 
+            React.createElement("tr", null, 
+              React.createElement("th", null, 
+                React.createElement("div", {className: "col-md-3"}, "Music"), 
+                React.createElement("div", {className: "col-md-2"}, "Time Remaining"), 
+                React.createElement("div", {className: "col-md-2"}, "Date Entered"), 
+                React.createElement("div", {className: "col-md-4"}, "Action")
+              )
+            )
+          ), 
+          React.createElement("tbody", null, 
+            this.props.data.map(function(song) {
+              return React.createElement(Song, {key: song.id, data: song});
+            })
+          )
+        )
+      );
+    }
+  });
+}(React, module));
 },{"./Song.jsx":5}],9:[function(require,module,exports){
 (function(_) {
   var LSService = require('../services/LSService.js'),
