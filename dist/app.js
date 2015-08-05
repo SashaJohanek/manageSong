@@ -108,3 +108,39 @@
     }
   });
 }(React));
+},{}],5:[function(require,module,exports){
+(function(React, module, undefined) {
+  var Rating = require("./Rating.jsx");
+  module.exports = React.createClass({displayName: "exports",
+    render: function() {
+      return (
+        React.createElement("tr", null, 
+          React.createElement("td", null, 
+            React.createElement("div", {className: "col-md-3 pull-left"}, 
+              React.createElement("strong", null, this.props.data.artist), React.createElement("br", null), 
+              React.createElement("small", null, this.props.data.title)
+            ), 
+            React.createElement("div", {className: "col-md-2"}, 
+              React.createElement("strong", null, this.props.data.month, " month(s)")
+            ), 
+            React.createElement("div", {className: "col-md-2"}, 
+              React.createElement("strong", null, this.props.data.registerDate)
+            ), 
+            React.createElement("div", {className: "col-md-4 pull-right"}, 
+              React.createElement(Rating, {data: this.props.data}), 
+              React.createElement("button", {type: "button", className: "btn btn-success", onClick: this.editSong}, 
+                React.createElement("i", {className: "fa fa-pencil"})
+              ), 
+              React.createElement("button", {type: "button", className: "btn btn-danger", onClick: this.deleteSong}, 
+                React.createElement("i", {className: "fa fa-trash-o"})
+              )
+            )
+          )
+        ) 
+      );
+    },
+    deleteSong: function() {
+      this.props.data.delete();
+    }
+  });
+}(React, module));
