@@ -11,3 +11,24 @@
   render();
   Song.subscribe(render);
 }(React, _));
+
+},{"./components/App.jsx":2,"./models/musicModel.js":9}],2:[function(require,module,exports){
+(function(React, module, undefined) {
+  var Songs = require('./Songs.jsx'),
+      SongForm = require('./SongForm.jsx');
+  
+  module.exports = React.createClass({displayName: "exports",
+    render: function() {
+      return (
+        React.createElement("div", {className: "container"}, 
+          React.createElement("div", {className: "page-header"}, 
+            React.createElement("h1", null, "Rate the music ", React.createElement("small", null, "Like them all!"))
+          ), 
+          
+          alert, 
+          React.createElement(Songs, {data: this.props.songs}), 
+          React.createElement(SongForm, null)
+        )
+      );
+    }
+  });
