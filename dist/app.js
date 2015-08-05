@@ -144,3 +144,69 @@
     }
   });
 }(React, module));
+},{}],7:[function(require,module,exports){
+(function(React, _) {
+  var Song = require('../models/SongModel.js');
+  module.exports = React.createClass({displayName: "exports",
+    isDisabled:  function() {
+      return _.isBlank(this.state.artist) || _.isBlank(this.state.title);
+    },
+    handleNewArtist: function(event) {
+      this.setState(_.extend(this.state, {
+        artist: event.target.value
+      }));
+    },
+    handleNewTitle: function(event) {
+      this.setState(_.extend(this.state, {
+        title: event.target.value
+      }));
+    },
+    handleNewMonth: function(event) {
+      this.setState(_.extend(this.state, {
+        month: event.target.value
+      }));
+    },
+    addSong: function(event) {
+      var song = new Song(this.state);
+      song.save();
+      this.setState(this.getInitialState());
+
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    render: function() {
+      var disabled = this.isDisabled();
+      return (
+        React.createElement("form", {role: "form", onSubmit: this.addSong}, 
+          React.createElement("div", {className: "row"}, 
+            React.createElement("div", {className: "col-sm-3"}, 
+              React.createElement("label", {className: "sr-only", htmlFor: "artist"}, "Artist"), 
+              React.createElement("input", {type: "text", className: "form-control", name: "artist", value: this.state.artist, 
+                placeholder: "Name of the artist, band, ...", autofocus: true, onChange: this.handleNewArtist})
+            ), 
+            React.createElement("div", {className: "col-sm-3"}, 
+              React.createElement("label", {className: "sr-only", htmlFor: "song"}, "Song"), 
+              React.createElement("input", {type: "text", className: "form-control", name: "song", value: this.state.title, 
+                placeholder: "Enter the name of the music...", onChange: this.handleNewTitle})
+            ), 
+            React.createElement("div", {className: "col-sm-4"}, 
+              React.createElement("label", {className: "sr-only", htmlFor: "month"}), 
+              React.createElement("input", {type: "text", className: "form-control", name: "month", value: this.state.month, 
+                placeholder: "Enter the time range of the music...", onChange: this.handleNewMonth})
+            ), 
+            React.createElement("div", {className: "col-sm-2"}, 
+              React.createElement("button", {type: "submit", className: "btn btn-default form-control", disabled: disabled}, "Add")
+            )
+          )
+        )
+      );
+    },
+    getInitialState: function() {
+      return {
+        artist: "",
+        title: "",
+        month: ""
+      };
+    }
+  });
+}(React, _));
